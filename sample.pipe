@@ -1,0 +1,21 @@
+-- This is a commentary
+
+fn fib() {
+	a, b, i := 0, 1, 0
+	for {
+		yield (b, i)
+		a, b, i = b, a+b, i+1
+	}
+}
+
+for x, i in fib() {
+	if i > 50 { break }
+  println(i, x)
+}
+
+
+n := fib()
+| filter x: x[0] % 2 == 0
+| Number
+
+println(n)

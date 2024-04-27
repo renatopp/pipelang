@@ -1,0 +1,15 @@
+
+fs.Watch('**/*.jpg')
+| filter x: fuzzy.Score(x, 'sample') > .8
+| pmap x: do stuff
+
+
+--
+
+for file <- watch('') {
+  if fuzzy.Score(x, '...') < 0.8 {
+    continue
+  }
+
+  go doStuf()
+}

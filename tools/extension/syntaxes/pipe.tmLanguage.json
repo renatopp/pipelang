@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Pipe",
+  "scopeName": "source.pipe",
+  "fileTypes": [
+    "pipe"
+  ],
+  "patterns": [
+    {
+      "name": "comment.line.pipe",
+      "match": "--.*$"
+    },
+    {
+      "name": "constant.numeric.float.pipe",
+      "match": "\\b((\\d+(\\.\\d+)?)|(\\.\\d+))(e[\\+\\-]?\\d+)?\\b"
+    },
+    {
+      "name": "constant.language.pipe",
+      "match": "\\b(true|false)\\b"
+    },
+    {
+      "name": "keyword.control.flow.pipe",
+      "match": "\\b(if|else|for|match|with|break|continue|return|raise|yield)\\b"
+    },
+    {
+      "name": "keyword.operator.assignment.augmented.pipe",
+      "match": "\\+\\=|-\\=|\\*\\=|/\\=|//\\=|\\*\\*\\="
+    },
+    {
+      "name": "keyword.operator.assignment.pipe",
+      "match": "\\=|\\:\\="
+    },
+    {
+      "name": "keyword.operator.assignment.pipe",
+      "match": "\\b(as)\\b"
+    },
+    {
+      "name": "keyword.operator.comparison.pipe",
+      "match": "<\\=|>\\=|\\=\\=|<|>|\\!\\="
+    },
+    {
+      "name": "keyword.operator.arithmetic.pipe",
+      "match": "\\+|\\-|\\*|\\*\\*|/|//|%"
+    },
+    {
+      "name": "keyword.operator.logical.pipe",
+      "match": "\\b(and|or|not|in)\\b"
+    },
+    {
+      "name": "keyword.operator.pipe.pipe",
+      "match": "\\|"
+    },
+    {
+      "name": "keyword.other.pipe",
+      "match": "\\b(fn|data)\\b"
+    },
+    {
+      "name": "string.quoted.single.pipe",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "match": "\\\\'"
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.double.pipe",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "match\"": "\\\\\""
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.backtick.pipe",
+      "begin": "`",
+      "end": "`",
+      "contentName": "string.escaped",
+      "patterns": [
+        {
+          "match": "\\\\."
+        }
+      ]
+    }
+  ],
+  "repository": null
+}

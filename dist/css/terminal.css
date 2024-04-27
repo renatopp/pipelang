@@ -1,0 +1,9 @@
+.runtime.terminal {
+	text-align: left;
+	background-color: transparent;
+}
+
+.terminal {
+	--color: var(--color-text);
+	--size: 1.4;
+}

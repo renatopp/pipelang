@@ -1,0 +1,81 @@
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.39.3/js/jquery.terminal.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.39.3/css/jquery.terminal.min.css"
+	rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/prism.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap" rel="stylesheet">
+<script src="/js/wasm.js"></script>
+
+<script>
+	$(function () {
+
+		const go = new Go();
+		WebAssembly.instantiateStreaming(fetch("/js/pipe.wasm"), go.importObject).then((result) => {
+			go.run(result.instance);
+		});
+
+		$('#terminal').terminal(function (command, term) {
+			if (command === '') {
+				term.echo('')
+				return
+			}
+
+			const res = pipe_eval(command)
+			var div = ''
+			if (res.startsWith('Error')) {
+				div = $('<span class="response response-error">' + res + '</span>')
+			} else if (res.startsWith('<')) {
+				div = $('')
+			} else {
+				div = $('<span class="response response-ok">' + res + '</span>')
+			}
+			term.echo(div);
+		}, {
+			greetings: false,
+			prompt: 'pipe> ',
+			height: 700,
+			keydown: function (e) {
+				if (e.which == 82 && e.ctrlKey) {
+					return true;
+				}
+			}
+		}).focus();
+
+		$.terminal.syntax('haskell')
+	});
+</script>
+
+<style>
+	.runtime.terminal {
+		text-align: left;
+		background-color: transparent;
+	}
+
+	.terminal {
+		--color: var(--color-text-light);
+		--size: 1;
+		--font: "Martian Mono", monospace;
+	}
+
+	.terminal .response {
+		display: block;
+		padding-top: 0.5rem;
+		padding-bottom: 0.75rem;
+		white-space: pre-wrap;
+		font-size: 0.9em;
+	}
+
+	.terminal .response-error {
+		opacity: 0.8;
+		color: #FF204E;
+	}
+
+	.terminal .response-ok {
+		opacity: 0.8;
+	}
+</style>

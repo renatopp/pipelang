@@ -1,0 +1,25 @@
+{
+    "name": "pipe",
+    "displayName": "Pipe",
+    "description": "Color highlight for pipelang",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.88.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "pipe",
+            "aliases": ["Pipe", "pipe"],
+            "extensions": [".pipe",".pp"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "pipe",
+            "scopeName": "source.pipe",
+            "path": "./syntaxes/pipe.tmLanguage.json"
+        }]
+    }
+}

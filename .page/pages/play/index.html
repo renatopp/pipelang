@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PIPE Lang</title>
+	{{.html_precss}}
+</head>
+
+<body>
+	<main>
+		{{.html_top_main}}
+
+		<section class="playground">
+			<div class="section-body">
+				<div id="terminal" class="runtime"> </div>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>Created by <a href="https://r2p.dev">Renato Pereira</a> | 2024</p>
+	</footer>
+</body>
+
+{{.html_postcss}}
+{{.html_terminal}}
+
+<style>
+	section.playground {
+		color: var(--color-text-light);
+		padding: 50px 0 100px 0;
+		min-height: 80vh;
+		background-color: var(--bg-color-5);
+	}
+</style>
+
+</html>

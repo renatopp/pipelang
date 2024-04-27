@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PIPE Lang</title>
+	{{.html_precss}}
+	<style>
+		section.toc {
+			text-align: left;
+		}
+
+		ul.toc {
+			padding: 0;
+			text-align: left;
+		}
+
+		.toc-chapter {
+			list-style-type: none;
+			font-weight: bold;
+			font-size: 1.2em;
+			margin-top: 1em;
+		}
+
+		.toc-section {
+			margin-left: 1em;
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		{{.html_top_main}}
+
+		<section class="toc">
+			<div class="section-body">
+				<h2>Table of Contents</h2>
+				<ul class="toc">
+					{{range $toc := .TourToc}}
+					{{if $toc.Chapter}}
+					<div class="toc-chapter">{{$toc.Title}}</div>
+					{{else}}
+					<li class="toc-section"><a href="{{$toc.Link}}">{{$toc.Title}}</a></li>
+					{{end}}
+					{{end}}
+				</ul>
+			</div>
+		</section>
+
+	</main>
+
+	<footer>
+		<p>Created by <a href="https://r2p.dev">Renato Pereira</a> | 2024</p>
+	</footer>
+</body>
+
+{{.html_postcss}}
+
+</html>

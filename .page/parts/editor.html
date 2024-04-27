@@ -1,0 +1,73 @@
+<style>
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+	rel="stylesheet">
+<script src="/js/wasm.js"></script>
+
+<link rel="stylesheet" data-name="vs/editor/editor.main"
+	href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.48.0/min/vs/editor/editor.main.min.css">
+<script>var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.48.0/min/vs' } }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.48.0/min/vs/loader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.48.0/min/vs/editor/editor.main.nls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.48.0/min/vs/editor/editor.main.js"></script>
+
+<style>
+	#editor {
+		height: 100%;
+		min-height: 300px;
+	}
+
+	.monaco-editor {
+		outline-color: var(--vscode-editor-background);
+	}
+
+	.monaco-editor-background {
+		margin-top: 1rem;
+	}
+</style>
+
+<script>
+	$(function () {
+		const ed = document.getElementById('editor')
+		const ct = ed.innerHTML
+
+		ed.innerHTML = ''
+		const editor = monaco.editor.create(document.getElementById('editor'), {
+			value: ct,
+			language: 'haskell',
+			theme: 'vs-dark',
+			automaticLayout: true,
+			lineNumbers: "off",
+			minimap: {
+				enabled: false
+			},
+		});
+
+		const go = new Go();
+		WebAssembly.instantiateStreaming(fetch("/js/pipe.wasm"), go.importObject).then((result) => {
+			go.run(result.instance);
+			update();
+		});
+
+		function update() {
+			const code = editor.getValue()
+			if (code == "") {
+				rs.innerHTML = ""
+				return
+			}
+
+			const res = pipe_eval(code)
+			rs.innerHTML = res.replace(/\n/g, '<br>')
+		}
+
+		const rs = document.getElementById('editor-results')
+		editor.getModel().onDidChangeContent((event) => { update() });
+	});
+</script>
