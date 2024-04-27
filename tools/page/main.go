@@ -105,10 +105,10 @@ func main() {
 			},
 
 			// Print all
-			// func(ctx *vv.Ctx, file *vv.File) error {
-			// 	println(file.SourcePath, "=>", file.Dir, file.Name, file.Extension)
-			// 	return nil
-			// },
+			func(ctx *vv.Ctx, file *vv.File) error {
+				println(file.SourcePath, "=>", file.Dir, file.Name, file.Extension)
+				return nil
+			},
 
 			// Ignore all
 			// func(ctx *vv.Ctx, file *vv.File) error {

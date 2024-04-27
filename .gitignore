@@ -21,3 +21,4 @@
 go.work
 
 *.vsix
+dist/
