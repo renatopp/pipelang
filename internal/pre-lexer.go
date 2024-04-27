@@ -108,6 +108,11 @@ func (p *PreLexer) tokenizer() *tokens.Token {
 		case c0.Is('`'):
 			return p.EatRawString().WithType(T_STRING)
 
+			// spread
+		case s3 == "...":
+			p.EatChars(3)
+			return tokens.NewToken(T_SPREAD, s3).WithRangeChars(c0, c3)
+
 		// 3-length assignments
 		case slices.Contains(Assignments, s3):
 			p.EatChars(3)
@@ -137,11 +142,6 @@ func (p *PreLexer) tokenizer() *tokens.Token {
 		case slices.Contains(InfixOperators, s1):
 			p.EatChar()
 			return tokens.NewToken(T_OPERATOR, s1).WithRangeChars(c0, c1)
-
-		// spread
-		case s3 == "...":
-			p.EatChars(3)
-			return tokens.NewToken(T_SPREAD, s3).WithRangeChars(c0, c3)
 
 		// comma
 		case c0.Is(','):

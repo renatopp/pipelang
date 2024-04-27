@@ -14,12 +14,7 @@ import (
 
 func Debug() {
 	source := []byte(`
-	
-	range(1, 10)
-	| map x : (x, x*x)
-	| each (a, b): printfln('%d^2: %d', a, b)
-	| List
-
+	(a, ...c, d) := [1,2,3,4]...;
 	`)
 
 	if len(os.Args) > 2 {

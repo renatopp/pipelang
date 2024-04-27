@@ -87,7 +87,7 @@ func TestDict_FindAll(t *testing.T) {
 
 func TestDict_FindAllFn(t *testing.T) {
 	common.AssertCode(t, `a := { x=1, y=2, z=3 }; a.FindAllFn(fn (x) { x == 1 })`, "['x']")
-	common.AssertCode(t, `a := { x=1, y=2, z=3 }; a.FindAllFn(fn (x) { x > 1 })`, "['y', 'z']")
+	common.AssertCode(t, `a := { x=1, y=2, z=3 }; a.FindAllFn(fn (x) { x > 1 }).Sorted()`, "['y', 'z']")
 	common.AssertCode(t, `a := { x=1, y=2, z=3 }; a.FindAllFn(fn (x) { x > 3 })`, "[]")
 }
 
