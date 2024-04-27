@@ -73,7 +73,7 @@ func main() {
 
 			// Store html parts
 			processor.NewHtmlPart(data, func(file *vv.File) bool {
-				return strings.Contains(file.SourcePath, ".page\\parts")
+				return strings.Contains(file.SourcePath, ".page"+string(filepath.Separator)+"parts")
 			}),
 
 			// Process html pages

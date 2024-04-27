@@ -28,9 +28,6 @@ jobs:
         working-directory: tools/page
         run: go run main.go
 
-      - name: Debug
-        run: cat dist/index.html
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -40,16 +37,11 @@ jobs:
             echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
 
-      - name: Debug
-        run: cat dist/index.html
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "dist"
 
-      - name: Debug
-        run: cat dist/index.html
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
