@@ -13,7 +13,7 @@ You shouldn't. Feel free to try it, but at this point, the language is very unst
 fn fib(x) {
   return match x {
     0: 0;
-		1: 1
+    1: 1
     x: fib(x-1) + fib(x-2)
   }
 }
@@ -21,7 +21,7 @@ fn fib(x) {
 range()
 | map       fib
 | takeWhile x: x <= 4_000_000
-| filter    x: x%2 == 0
+| filter    x: x.IsEven()
 | sum
 ```
 
